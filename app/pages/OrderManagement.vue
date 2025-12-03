@@ -178,7 +178,7 @@ const exportPdf = async () => {
 
 
 
-function exportFile() {
+function exportExcel() {
   /* Create a new workbook */
   const wb = utils.book_new();
   
@@ -263,6 +263,13 @@ const setChartOptions = () => {
 };
 
 
+// Option button for export
+const exportOption = ref(false);
+
+// function optionSelected (param) {
+//   window.alert(`you chose ${param}`)
+//   exportOption.value = true;
+// }
 
 
 </script>
@@ -312,18 +319,39 @@ const setChartOptions = () => {
                     </DataTable>
                 </div>
                 <div class="flex space-x-3 p-4 justify-end">
-                    <Button 
-                        @click="exportPdf" 
+
+                  <Button v-if="!exportOption" label="Export" @click="exportOption = true" />
+                  <div v-if="exportOption" class="flex flex-col gap-4 p-4 bg-gray-800 rounded-lg ">
+                    <h2 class="mb-2">Chose export opotion</h2>
+                    <div class="flex gap-4">
+                      <Button
                         severity="danger"
-                        label="Export PDF" 
+                        label="Export PDF"
                         icon="pi pi-file-pdf text-red-800"
-                    />
-                    <Button 
-                        @click="exportFile"
+                        @click="exportPdf"
+                      />
+                      <Button
                         severity="success"
-                        label="Export Excel" 
+                        label="Export Excel"
                         icon="pi pi-file-excel text-green-800"
-                    />
+                        @click="exportExcel"
+                      />
+                    </div>
+                    <Button label="cancel" @click="exportOption = false" />
+
+                  </div>
+<!--                    <Button -->
+<!--                        @click="exportPdf" -->
+<!--                        severity="danger"-->
+<!--                        label="Export PDF" -->
+<!--                        icon="pi pi-file-pdf text-red-800"-->
+<!--                    />-->
+<!--                    <Button -->
+<!--                        @click="exportFile"-->
+<!--                        severity="success"-->
+<!--                        label="Export Excel" -->
+<!--                        icon="pi pi-file-excel text-green-800"-->
+<!--                    />-->
                 </div>
             </div>
         </div>
