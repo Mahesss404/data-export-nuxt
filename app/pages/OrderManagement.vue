@@ -340,18 +340,6 @@ const exportOption = ref(false);
                     <Button label="cancel" @click="exportOption = false" />
 
                   </div>
-<!--                    <Button -->
-<!--                        @click="exportPdf" -->
-<!--                        severity="danger"-->
-<!--                        label="Export PDF" -->
-<!--                        icon="pi pi-file-pdf text-red-800"-->
-<!--                    />-->
-<!--                    <Button -->
-<!--                        @click="exportFile"-->
-<!--                        severity="success"-->
-<!--                        label="Export Excel" -->
-<!--                        icon="pi pi-file-excel text-green-800"-->
-<!--                    />-->
                 </div>
             </div>
         </div>
