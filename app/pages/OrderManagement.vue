@@ -262,94 +262,71 @@ const setChartOptions = () => {
     };
 };
 
-const currentTime = ref('');
 
-const updateClock = () => {
-  currentTime.value = new Date().toLocaleTimeString('id-ID', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: true
-  });
-};
 
-onMounted(() => {
-  updateClock();
-  const timer = setInterval(updateClock, 1000);
-
-  onUnmounted(() => clearInterval(timer));
-});
 
 </script>
 
 <template>
   <div class="min-h-screen bg-gray-800 p-6">
     <!-- Header Section -->
-    <div class="mb-8 ">
-      <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-white mb-4">Orders Dashboard</h1>
-        <div class="p-4 bg-gray-900 rounded-xl">
-        <i class="pi pi-clock mr-2"></i>
-        <span>{{ currentTime }}</span>
-      </div>
-      </div>
-    </div>
+    <Header/>
 
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <!-- Table Card -->
-      <div class="lg:col-span-2">
-        <div class="bg-gray-900 rounded-xl shadow-md overflow-hidden">
-          <div class="p-6">
-            <h2 class="text-lg font-semibold text-white mb-4">Order Details</h2>
-            <DataTable 
-              :value="data" 
-              :paginator="true" 
-              :rows="10"
-              paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
-              currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-              class="p-datatable-sm"
-              :scrollable="true"
-              scrollHeight="flex"
-            >
-              <Column field="id" header="ID" sortable style="width: 5%"></Column>
-              <Column field="customer" header="Customer" sortable style="width: 20%"></Column>
-              <Column field="email" header="Email" sortable style="width: 25%"></Column>
-              <Column field="status" header="Status" sortable style="width: 15%">
-                <template #body="{ data: rowData }">
-                  <span :class="{
-                    'px-2 py-1 rounded-full text-xs font-medium': true,
-                    'bg-yellow-300 text-yellow-800': rowData.status === 'Pending',
-                    'bg-green-300 text-green-800': rowData.status === 'Completed',
-                    'bg-red-300 text-red-800': rowData.status === 'Canceled'
-                  }">
-                    {{ rowData.status }}
-                  </span>
-                </template>
-              </Column>
-              <Column field="total" header="Total" sortable style="width: 15%">
-                <template #body="{ data: rowData }">
-                  <span class="font-medium">Rp{{ rowData.total.toLocaleString() }}</span>
-                </template>
-              </Column>
-              <Column field="date" header="Date" sortable style="width: 20%"></Column>
-            </DataTable>
-          </div>
-          <div class="flex space-x-3 p-4 justify-end">
-            <Button 
-              @click="exportPdf" 
-              label="Export PDF" 
-              class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors duration-200 flex items-center"
-              icon="pi pi-file-pdf"
-            />
-            <Button 
-              @click="exportFile" 
-              label="Export Excel" 
-              class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 flex items-center"
-              icon="pi pi-file-excel"
-            />
-          </div>
+        <!-- Table Card -->
+        <div class="lg:col-span-2">
+            <div class="bg-gray-900 rounded-xl shadow-md overflow-hidden">
+                <div class="p-6">
+                    <h2 class="text-lg font-semibold text-white mb-4">Order Details</h2>
+                    <DataTable 
+                        :value="data" 
+                        :paginator="true" 
+                        :rows="10"
+                        paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        class="p-datatable-sm"
+                        :scrollable="true"
+                        scrollHeight="flex"
+                    >
+                    <Column field="id" header="ID" sortable style="width: 5%"></Column>
+                    <Column field="customer" header="Customer" sortable style="width: 20%"></Column>
+                    <Column field="email" header="Email" sortable style="width: 25%"></Column>
+                    <Column field="status" header="Status" sortable style="width: 15%">
+                        <template #body="{ data: rowData }">
+                        <span :class="{
+                            'px-2 py-1 rounded-full text-xs font-medium': true,
+                            'bg-yellow-300 text-yellow-800': rowData.status === 'Pending',
+                            'bg-green-300 text-green-800': rowData.status === 'Completed',
+                            'bg-red-300 text-red-800': rowData.status === 'Canceled'
+                        }">
+                            {{ rowData.status }}
+                        </span>
+                        </template>
+                    </Column>
+                    <Column field="total" header="Total" sortable style="width: 15%">
+                        <template #body="{ data: rowData }">
+                        <span class="font-medium">Rp{{ rowData.total.toLocaleString() }}</span>
+                        </template>
+                    </Column>
+                    <Column field="date" header="Date" sortable style="width: 20%"></Column>
+                    </DataTable>
+                </div>
+                <div class="flex space-x-3 p-4 justify-end">
+                    <Button 
+                        @click="exportPdf" 
+                        severity="danger"
+                        label="Export PDF" 
+                        icon="pi pi-file-pdf text-red-800"
+                    />
+                    <Button 
+                        @click="exportFile"
+                        severity="success"
+                        label="Export Excel" 
+                        icon="pi pi-file-excel text-green-800"
+                    />
+                </div>
+            </div>
         </div>
-      </div>
 
       <!-- Chart Card -->
       <div class="lg:col-span-1">
