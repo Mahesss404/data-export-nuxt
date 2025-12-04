@@ -1,8 +1,7 @@
-import { ref } from 'vue';
+import {ref} from "vue";
 
-export const useOrders = () => {
-    // Data orders
-    const orders = ref([
+export default defineEventHandler(() => {
+    const orders = [
         {
             id: "ORD-002",
             customer: "Budi",
@@ -99,7 +98,6 @@ export const useOrders = () => {
             total: 200000,
             date: "2025-12-09"
         }
-    ]);
-
-    return { orders };
-};
+    ];
+    return orders
+})
