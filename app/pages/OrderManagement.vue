@@ -266,11 +266,6 @@ const setChartOptions = () => {
 // Option button for export
 const exportOption = ref(false);
 
-// function optionSelected (param) {
-//   window.alert(`you chose ${param}`)
-//   exportOption.value = true;
-// }
-
 
 </script>
 
@@ -338,7 +333,6 @@ const exportOption = ref(false);
                       />
                     </div>
                     <Button label="cancel" @click="exportOption = false" />
-
                   </div>
                 </div>
             </div>
