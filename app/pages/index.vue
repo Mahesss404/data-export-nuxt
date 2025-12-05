@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 const config =  useRuntimeConfig()
-const todos = await $fetch(`${config.public.apiURL}/todos`)
+const todos = await $fetch(config.public.apiURL)
 // const todos = await fetch('env.').then(response => response.json())
 const {data: orders} = await useFetch("/api/orders")
 
@@ -12,6 +12,7 @@ const {data: orders} = await useFetch("/api/orders")
         <Header />
         <h1>Welcome to the homepage</h1>
         <div>
+          <p>Ini data dari env</p>
           <li v-for="order in orders" :key="order.id" >
             {{ order.customer}} - {{ order.email}}</li>
         </div>
