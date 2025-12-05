@@ -1,5 +1,8 @@
 <script setup lang="ts">
-const todos = await fetch('env.').then(response => response.json())
+
+const config =  useRuntimeConfig()
+const todos = await $fetch(`${config.public.apiURL}/todos`)
+// const todos = await fetch('env.').then(response => response.json())
 const {data: orders} = await useFetch("/api/orders")
 
 </script>

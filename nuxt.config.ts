@@ -17,7 +17,7 @@ export default defineNuxtConfig({
     }
   },
   runtimeConfig: {
-    public {
+    public: {
       apiURL: process.env.MY_DATA_ENV
     }
   }
