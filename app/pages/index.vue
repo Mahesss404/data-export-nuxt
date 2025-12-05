@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const todos = await fetch('https://jsonplaceholder.typicode.com/todos').then(response => response.json())
+const todos = await fetch('env.').then(response => response.json())
 const {data: orders} = await useFetch("/api/orders")
 
 </script>

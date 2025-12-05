@@ -15,5 +15,10 @@ export default defineNuxtConfig({
         preset:Aura
       }
     }
+  },
+  runtimeConfig: {
+    public {
+      apiURL: process.env.MY_DATA_ENV
+    }
   }
 })
